@@ -1,0 +1,665 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mitracare Solution - Servis HP cepat, murah meriah, dan terpercaya. Solusi untuk semua masalah smartphone kamu." />
+  <meta name="theme-color" content="#f59e0b" />
+  <title>Mitracare Solution – Solusi Cepat Untuk Semua Masalah HP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== SPLASH SCREEN ===== -->
+  <div id="splashScreen" role="status" aria-label="Memuat Mitracare Solution">
+    <div class="splash-logo" id="splashLogo">
+      <span class="splash-logo-icon">🔧</span>
+      <span class="splash-logo-text">Mitracare<span>Solution</span></span>
+    </div>
+    <p class="splash-tagline" id="splashTagline">SOLUSI CEPAT UNTUK SEMUA MASALAH HP</p>
+    <div class="splash-bar" id="splashBar">
+      <div class="splash-bar-fill" id="splashBarFill"></div>
+    </div>
+  </div>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="#home" class="navbar-logo" aria-label="Mitracare Solution Home">
+        <span class="logo-icon">🔧</span>
+        <span class="logo-text">Mitracare<span class="logo-accent">Solution</span></span>
+      </a>
+
+      <nav class="navbar-nav" id="navMenu" aria-label="Menu utama">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#layanan" class="nav-link">Layanan</a>
+        <a href="#tentang" class="nav-link">Tentang</a>
+        <a href="#kontak" class="nav-link">Kontak</a>
+      </nav>
+
+      <a href="#booking" class="btn btn-primary navbar-cta" id="navCta">Servis Sekarang</a>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <a href="#home" class="mobile-nav-link">Home</a>
+      <a href="#layanan" class="mobile-nav-link">Layanan</a>
+      <a href="#tentang" class="mobile-nav-link">Tentang</a>
+      <a href="#kontak" class="mobile-nav-link">Kontak</a>
+      <a href="#booking" class="btn btn-primary mobile-cta">Servis Sekarang</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+      <div class="hero-bg-decoration" aria-hidden="true">
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+        <div class="hero-orb hero-orb-3"></div>
+      </div>
+
+      <div class="container hero-container">
+        <!-- Hero Text -->
+        <div class="hero-content">
+          <div class="hero-badge" data-animate="fade-up">
+            <span class="badge-dot"></span>
+            MITRACARE SOLUTION
+          </div>
+
+          <h1 class="hero-heading" data-animate="fade-up" data-delay="100">
+            HP Bermasalah?<br />
+            <span class="hero-heading-accent">Tenang, Kami Siap Bantu.</span>
+          </h1>
+
+          <p class="hero-subtitle" data-animate="fade-up" data-delay="200">
+            Solusi servis HP cepat, murah meriah, dan terpercaya.
+          </p>
+
+          <div class="typewriter-wrap" data-animate="fade-up" data-delay="300" aria-live="polite" aria-atomic="true">
+            <span class="typewriter-text" id="typewriterText"></span><span class="typewriter-cursor" aria-hidden="true">|</span>
+          </div>
+
+          <div class="hero-buttons" data-animate="fade-up" data-delay="400">
+            <a href="#booking" class="btn btn-primary btn-lg">
+              <span>🔧</span> Servis Sekarang
+            </a>
+            <a href="#wa-direct" class="btn btn-outline btn-lg" id="heroWaBtn">
+              <span>💬</span> Chat WhatsApp
+            </a>
+          </div>
+
+          <div class="live-status" id="liveStatus" data-animate="fade-up" data-delay="500">
+            <span class="live-dot" id="liveDot" aria-hidden="true"></span>
+            <span class="live-text" id="liveText">Memuat status...</span>
+          </div>
+        </div>
+
+        <!-- Hero Visual — Phone Mockup with GitHub Video Carousel -->
+        <div class="hero-visual" data-animate="fade-left" data-delay="200">
+          <div class="phone-mockup">
+            <div class="phone-body">
+              <!-- Notch -->
+              <div class="phone-notch">
+                <div class="phone-notch-dot"></div>
+                <div class="phone-notch-bar"></div>
+                <div class="phone-notch-dot"></div>
+              </div>
+
+              <!-- Video Screen -->
+              <div class="phone-screen phone-screen-video">
+                <!-- Loading state -->
+                <div class="phone-video-loading" id="phoneVideoLoading">
+                  <div class="phone-video-spinner"></div>
+                  <span>Memuat video...</span>
+                </div>
+
+                <!-- Error state -->
+                <div class="phone-video-error" id="phoneVideoError" style="display:none">
+                  <span>📡</span>
+                  <span>Gagal memuat video</span>
+                </div>
+
+                <!-- Video slider track -->
+                <div class="phone-video-track" id="phoneVideoTrack"></div>
+
+                <!-- Overlay controls -->
+                <div class="phone-video-overlay" id="phoneVideoOverlay" style="display:none">
+                  <!-- Top status bar -->
+                  <div class="phone-video-statusbar">
+                    <span id="phoneVideoClock">9:41</span>
+                    <span>●●● 🔋</span>
+                  </div>
+
+                  <!-- Bottom info -->
+                  <div class="phone-video-info">
+                    <div class="phone-video-title" id="phoneVideoTitle">Mitracare Solution</div>
+                    <div class="phone-video-dots" id="phoneVideoDots"></div>
+                  </div>
+
+                  <!-- Side nav arrows -->
+                  <button class="phone-vid-nav phone-vid-prev" id="phoneVidPrev" aria-label="Video sebelumnya">‹</button>
+                  <button class="phone-vid-nav phone-vid-next" id="phoneVidNext" aria-label="Video berikutnya">›</button>
+                </div>
+              </div>
+
+              <div class="phone-home-indicator"></div>
+            </div>
+
+            <!-- Floating elements -->
+            <div class="float-item float-wrench" aria-hidden="true">🔧</div>
+            <div class="float-item float-battery" aria-hidden="true">🔋</div>
+            <div class="float-item float-gear"    aria-hidden="true">⚙️</div>
+            <div class="float-item float-lcd"     aria-hidden="true">📱</div>
+            <div class="float-item float-check"   aria-hidden="true">✅</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TRUST STRIP ===== -->
+    <div class="trust-strip" aria-label="Keunggulan kami">
+      <div class="trust-track">
+        <div class="trust-items" id="trustItems">
+          <div class="trust-item"><span class="trust-icon">💰</span> Murah Meriah</div>
+          <div class="trust-item"><span class="trust-icon">👨‍🔧</span> Teknisi Berpengalaman</div>
+          <div class="trust-item"><span class="trust-icon">⚡</span> Pengerjaan Cepat</div>
+          <div class="trust-item"><span class="trust-icon">😊</span> Pelayanan Ramah</div>
+          <div class="trust-item" aria-hidden="true"><span class="trust-icon">💰</span> Murah Meriah</div>
+          <div class="trust-item" aria-hidden="true"><span class="trust-icon">👨‍🔧</span> Teknisi Berpengalaman</div>
+          <div class="trust-item" aria-hidden="true"><span class="trust-icon">⚡</span> Pengerjaan Cepat</div>
+          <div class="trust-item" aria-hidden="true"><span class="trust-icon">😊</span> Pelayanan Ramah</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== LAYANAN ===== -->
+    <section class="section" id="layanan">
+      <div class="container">
+        <div class="section-header" data-animate="fade-up">
+          <div class="section-badge">Layanan Kami</div>
+          <h2 class="section-title">Servis HP Apa yang<br/>Kamu Butuhkan?</h2>
+          <p class="section-subtitle">Kami siap membantu berbagai masalah smartphone.</p>
+        </div>
+        <div class="services-grid" role="list">
+          <div class="service-card" data-animate="fade-up" data-delay="0"   role="listitem" tabindex="0"><div class="service-icon">📺</div><div class="service-name">LCD</div></div>
+          <div class="service-card" data-animate="fade-up" data-delay="50"  role="listitem" tabindex="0"><div class="service-icon">🔋</div><div class="service-name">Baterai</div></div>
+          <div class="service-card" data-animate="fade-up" data-delay="100" role="listitem" tabindex="0"><div class="service-icon">🔌</div><div class="service-name">Charging</div></div>
+          <div class="service-card" data-animate="fade-up" data-delay="150" role="listitem" tabindex="0"><div class="service-icon">⚡</div><div class="service-name">IC</div></div>
+          <div class="service-card" data-animate="fade-up" data-delay="200" role="listitem" tabindex="0"><div class="service-icon">💻</div><div class="service-name">Software</div></div>
+          <div class="service-card" data-animate="fade-up" data-delay="250" role="listitem" tabindex="0"><div class="service-icon">📷</div><div class="service-name">Kamera</div></div>
+          <div class="service-card" data-animate="fade-up" data-delay="300" role="listitem" tabindex="0"><div class="service-icon">🔊</div><div class="service-name">Speaker</div></div>
+          <div class="service-card" data-animate="fade-up" data-delay="350" role="listitem" tabindex="0"><div class="service-icon">📶</div><div class="service-name">Sinyal</div></div>
+          <div class="service-card" data-animate="fade-up" data-delay="400" role="listitem" tabindex="0"><div class="service-icon">💀</div><div class="service-name">Mati Total</div></div>
+          <div class="service-card" data-animate="fade-up" data-delay="450" role="listitem" tabindex="0"><div class="service-icon">🔩</div><div class="service-name">Lainnya</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SERVICE CTA ===== -->
+    <div class="service-cta-strip" data-animate="fade-up">
+      <div class="container service-cta-inner">
+        <div class="service-cta-text">
+          <h3>Butuh Servis HP?</h3>
+          <p>Pilih merek HP dan masalahnya, lalu langsung konsultasikan dengan kami.</p>
+        </div>
+        <a href="#booking" class="btn btn-primary btn-lg">MULAI SERVIS</a>
+      </div>
+    </div>
+
+    <!-- ===== BOOKING ===== -->
+    <section class="section booking-section" id="booking">
+      <div class="container">
+        <div class="section-header" data-animate="fade-up">
+          <div class="section-badge">Booking Servis</div>
+          <h2 class="section-title">Konsultasikan Servis HP Kamu</h2>
+        </div>
+
+        <div class="booking-card" data-animate="fade-up" data-delay="100">
+
+          <!-- Step 1: Brand — logos injected by JS -->
+          <div class="booking-step" id="step1">
+            <div class="booking-step-header">
+              <span class="step-number">1</span>
+              <span class="step-label">Pilih Merek HP</span>
+            </div>
+            <div class="brand-grid" id="brandGrid" role="group" aria-label="Pilih merek HP">
+              <!-- Populated by script.js with real SVG logos -->
+            </div>
+          </div>
+
+          <!-- Step 2: Damage -->
+          <div class="booking-step booking-step-hidden" id="step2">
+            <div class="booking-step-header">
+              <span class="step-number">2</span>
+              <span class="step-label">Pilih Kerusakan</span>
+            </div>
+            <div class="damage-grid" id="damageGrid" role="group" aria-label="Pilih jenis kerusakan">
+              <button class="damage-card" data-damage="LCD"       type="button"><span class="damage-icon">📺</span><span class="damage-name">LCD</span></button>
+              <button class="damage-card" data-damage="Baterai"   type="button"><span class="damage-icon">🔋</span><span class="damage-name">Baterai</span></button>
+              <button class="damage-card" data-damage="Charging"  type="button"><span class="damage-icon">🔌</span><span class="damage-name">Charging</span></button>
+              <button class="damage-card" data-damage="IC"        type="button"><span class="damage-icon">⚡</span><span class="damage-name">IC</span></button>
+              <button class="damage-card" data-damage="Software"  type="button"><span class="damage-icon">💻</span><span class="damage-name">Software</span></button>
+              <button class="damage-card" data-damage="Kamera"    type="button"><span class="damage-icon">📷</span><span class="damage-name">Kamera</span></button>
+              <button class="damage-card" data-damage="Speaker"   type="button"><span class="damage-icon">🔊</span><span class="damage-name">Speaker</span></button>
+              <button class="damage-card" data-damage="Sinyal"    type="button"><span class="damage-icon">📶</span><span class="damage-name">Sinyal</span></button>
+              <button class="damage-card" data-damage="Mati Total" type="button"><span class="damage-icon">💀</span><span class="damage-name">Mati Total</span></button>
+              <button class="damage-card" data-damage="Lainnya"   type="button"><span class="damage-icon">🔩</span><span class="damage-name">Lainnya</span></button>
+            </div>
+          </div>
+
+          <!-- Step 3: Data -->
+          <div class="booking-step booking-step-hidden" id="step3">
+            <div class="booking-step-header">
+              <span class="step-number">3</span>
+              <span class="step-label">Data Singkat</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="inputName">Nama <span class="required">*</span></label>
+              <input type="text" id="inputName" class="form-input" placeholder="Masukkan nama" autocomplete="given-name" maxlength="60" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="inputNote">Catatan <span class="optional">(opsional)</span></label>
+              <textarea id="inputNote" class="form-input form-textarea" placeholder="Ceritakan masalah HP kamu..." rows="3" maxlength="300"></textarea>
+            </div>
+          </div>
+
+          <!-- Step 4: Summary & CTA -->
+          <div class="booking-step booking-step-hidden" id="step4">
+            <div class="booking-summary" id="bookingSummary" aria-live="polite">
+              <div class="summary-title">Ringkasan Konsultasi</div>
+              <div class="summary-items">
+                <div class="summary-item">
+                  <span class="summary-label">📱 Merek HP</span>
+                  <span class="summary-value" id="summaryBrand">—</span>
+                </div>
+                <div class="summary-item">
+                  <span class="summary-label">🔧 Kerusakan</span>
+                  <span class="summary-value" id="summaryDamage">—</span>
+                </div>
+                <div class="summary-item">
+                  <span class="summary-label">👤 Nama</span>
+                  <span class="summary-value" id="summaryName">—</span>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-wa btn-xl" id="waConsultBtn" type="button">
+              💬 KONSULTASI VIA WHATSAPP
+            </button>
+            <p class="wa-note">Kamu akan diarahkan ke WhatsApp secara otomatis.</p>
+          </div>
+
+          <!-- Progress -->
+          <div class="booking-progress" aria-label="Langkah booking">
+            <div class="progress-track">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-steps">
+              <div class="progress-step active" id="ps1">1</div>
+              <div class="progress-step" id="ps2">2</div>
+              <div class="progress-step" id="ps3">3</div>
+              <div class="progress-step" id="ps4">✓</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TENTANG ===== -->
+    <section class="section about-section" id="tentang">
+      <div class="container about-container">
+        <div class="about-visual" data-animate="fade-right">
+          <div class="about-illustration">
+
+            <!-- Laptop mockup with video carousel -->
+            <div class="about-laptop-mockup">
+              <!-- Lid / Screen -->
+              <div class="about-laptop-lid">
+                <div class="about-laptop-bezel">
+                  <!-- Camera dot -->
+                  <div class="about-laptop-cam"></div>
+
+                  <!-- Screen area = video carousel -->
+                  <div class="about-laptop-screen" id="aboutPhoneScreen">
+
+                    <!-- Loading -->
+                    <div class="about-vid-loading" id="aboutVidLoading">
+                      <div class="about-vid-spinner"></div>
+                      <span>Memuat video...</span>
+                    </div>
+
+                    <!-- Error -->
+                    <div class="about-vid-error" id="aboutVidError">
+                      <span>&#128225;</span>
+                      <span>Belum ada video</span>
+                    </div>
+
+                    <!-- Track -->
+                    <div class="about-vid-track" id="aboutVidTrack"></div>
+
+                    <!-- Overlay -->
+                    <div class="about-vid-overlay" id="aboutVidOverlay">
+                      <div class="about-vid-statusbar">
+                        <span>&#9679; &#9679; &#9679;</span>
+                        <span id="aboutVidClock">9:41</span>
+                      </div>
+                      <div class="about-vid-bottom">
+                        <div class="about-vid-title" id="aboutVidTitle">Mitracare Solution</div>
+                        <div class="about-vid-dots" id="aboutVidDots"></div>
+                        <div class="about-vid-navrow">
+                          <button class="about-vid-btn" id="aboutVidPrev" aria-label="Sebelumnya">&#8249;</button>
+                          <button class="about-vid-btn" id="aboutVidNext" aria-label="Selanjutnya">&#8250;</button>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div><!-- /screen -->
+                </div><!-- /bezel -->
+              </div><!-- /lid -->
+
+              <!-- Base / Keyboard -->
+              <div class="about-laptop-base">
+                <div class="about-laptop-keyboard">
+                  <div class="about-laptop-trackpad"></div>
+                </div>
+              </div>
+            </div><!-- /laptop mockup -->
+          </div>
+        </div>
+
+        <div class="about-content" data-animate="fade-left">
+          <div class="section-badge">Tentang Kami</div>
+          <h2 class="section-title">Tentang Mitracare Solution</h2>
+          <p class="about-text">
+            Mitracare Solution hadir sebagai solusi untuk berbagai kebutuhan servis smartphone.
+            Kami mengutamakan pelayanan yang ramah, pengerjaan yang teliti, dan harga yang bersahabat.
+          </p>
+          <p class="about-text">
+            Kepuasan pelanggan adalah prioritas utama kami. Setiap perangkat ditangani dengan penuh
+            kehati-hatian menggunakan teknik yang tepat dan komponen berkualitas.
+          </p>
+          <div class="about-stats">
+            <div class="stat-item">
+              <div class="stat-icon">🏆</div>
+              <div class="stat-label">Berpengalaman &<br>Bersertifikat</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">🔧</div>
+              <div class="stat-label">Hardware<br>Solution</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">💻</div>
+              <div class="stat-label">Software<br>Solution</div>
+            </div>
+            <div class="stat-item stat-item--wide">
+              <div class="stat-badge">
+                <span>📜</span> Borneo Flasher
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== KEUNGGULAN ===== -->
+    <section class="section features-section">
+      <div class="container">
+        <div class="section-header" data-animate="fade-up">
+          <div class="section-badge">Keunggulan</div>
+          <h2 class="section-title">Kenapa Pilih<br />Mitracare Solution?</h2>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card" data-animate="fade-up" data-delay="0">
+            <div class="feature-icon-wrap">💰</div>
+            <h3 class="feature-title">Murah Meriah</h3>
+            <p class="feature-desc">Harga bersahabat untuk semua pelanggan tanpa mengorbankan kualitas.</p>
+          </div>
+          <div class="feature-card" data-animate="fade-up" data-delay="80">
+            <div class="feature-icon-wrap">👨‍🔧</div>
+            <h3 class="feature-title">Teknisi Berpengalaman</h3>
+            <p class="feature-desc">Ditangani secara teliti dan profesional oleh teknisi berpengalaman.</p>
+          </div>
+          <div class="feature-card" data-animate="fade-up" data-delay="160">
+            <div class="feature-icon-wrap">⚡</div>
+            <h3 class="feature-title">Pengerjaan Cepat</h3>
+            <p class="feature-desc">Mengutamakan proses yang efisien agar HP kamu cepat kembali normal.</p>
+          </div>
+          <div class="feature-card" data-animate="fade-up" data-delay="240">
+            <div class="feature-icon-wrap">🔩</div>
+            <h3 class="feature-title">Sparepart Berkualitas</h3>
+            <p class="feature-desc">Mengutamakan kualitas komponen untuk hasil servis yang tahan lama.</p>
+          </div>
+          <div class="feature-card" data-animate="fade-up" data-delay="320">
+            <div class="feature-icon-wrap">😊</div>
+            <h3 class="feature-title">Pelayanan Ramah</h3>
+            <p class="feature-desc">Siap membantu dan memberikan konsultasi dengan pelayanan terbaik.</p>
+          </div>
+          <div class="feature-card" data-animate="fade-up" data-delay="400">
+            <div class="feature-icon-wrap">🛡️</div>
+            <h3 class="feature-title">Garansi Servis</h3>
+            <p class="feature-desc">Tersedia untuk layanan tertentu sesuai ketentuan yang berlaku.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CARA SERVIS ===== -->
+    <section class="section how-section">
+      <div class="container">
+        <div class="section-header" data-animate="fade-up">
+          <div class="section-badge">Cara Kerja</div>
+          <h2 class="section-title">Cara Servis di<br />Mitracare Solution</h2>
+        </div>
+        <div class="how-steps" role="list">
+          <div class="how-step" data-animate="fade-up" data-delay="0"   role="listitem">
+            <div class="how-number">01</div>
+            <div class="how-connector" aria-hidden="true"></div>
+            <div class="how-icon">📞</div>
+            <h3 class="how-title">Hubungi Kami</h3>
+            <p class="how-desc">Konsultasikan masalah HP kamu kepada kami terlebih dahulu.</p>
+          </div>
+          <div class="how-step" data-animate="fade-up" data-delay="100" role="listitem">
+            <div class="how-number">02</div>
+            <div class="how-connector" aria-hidden="true"></div>
+            <div class="how-icon">🔍</div>
+            <h3 class="how-title">Diagnosa</h3>
+            <p class="how-desc">HP diperiksa oleh teknisi untuk mengetahui kerusakan secara detail.</p>
+          </div>
+          <div class="how-step" data-animate="fade-up" data-delay="200" role="listitem">
+            <div class="how-number">03</div>
+            <div class="how-connector" aria-hidden="true"></div>
+            <div class="how-icon">🔧</div>
+            <h3 class="how-title">Perbaikan</h3>
+            <p class="how-desc">Proses servis dilakukan dengan teliti menggunakan komponen berkualitas.</p>
+          </div>
+          <div class="how-step" data-animate="fade-up" data-delay="300" role="listitem">
+            <div class="how-number">04</div>
+            <div class="how-icon">✅</div>
+            <h3 class="how-title">Selesai</h3>
+            <p class="how-desc">HP siap digunakan kembali. Kamu bisa cek dan langsung dibawa pulang.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section faq-section">
+      <div class="container">
+        <div class="section-header" data-animate="fade-up">
+          <div class="section-badge">FAQ</div>
+          <h2 class="section-title">Pertanyaan Umum</h2>
+        </div>
+        <div class="faq-list" data-animate="fade-up" data-delay="100">
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Apakah bisa konsultasi sebelum servis?</span>
+              <span class="faq-chevron" aria-hidden="true">›</span>
+            </button>
+            <div class="faq-answer">
+              <p>Ya, silakan hubungi Mitracare Solution terlebih dahulu. Kami siap memberikan konsultasi dan informasi yang kamu butuhkan sebelum memutuskan untuk servis.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Apakah servisnya murah?</span>
+              <span class="faq-chevron" aria-hidden="true">›</span>
+            </button>
+            <div class="faq-answer">
+              <p>Kami mengutamakan layanan murah meriah dengan harga yang bersahabat. Konsultasikan terlebih dahulu untuk mendapatkan informasi lengkap mengenai harga servis HP kamu.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Apakah ada garansi?</span>
+              <span class="faq-chevron" aria-hidden="true">›</span>
+            </button>
+            <div class="faq-answer">
+              <p>Garansi tersedia untuk layanan tertentu sesuai ketentuan yang berlaku. Silakan tanyakan langsung kepada kami mengenai detail garansi untuk jenis servis yang kamu butuhkan.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Berapa lama proses servis?</span>
+              <span class="faq-chevron" aria-hidden="true">›</span>
+            </button>
+            <div class="faq-answer">
+              <p>Tergantung jenis kerusakan dan kondisi perangkat. Beberapa servis bisa selesai dalam hitungan jam, namun ada juga yang membutuhkan waktu lebih lama. Kami akan selalu memberikan estimasi waktu yang jelas.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Merek HP apa saja yang bisa diservis?</span>
+              <span class="faq-chevron" aria-hidden="true">›</span>
+            </button>
+            <div class="faq-answer">
+              <p>Kami melayani berbagai merek HP populer seperti iPhone, Samsung, Xiaomi, Redmi, POCO, OPPO, vivo, realme, Infinix, ASUS, TECNO, Huawei, dan masih banyak lagi. Hubungi kami untuk informasi lebih lanjut.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FINAL CTA ===== -->
+    <section class="final-cta-section" id="wa-direct">
+      <div class="final-cta-bg" aria-hidden="true">
+        <div class="cta-orb cta-orb-1"></div>
+        <div class="cta-orb cta-orb-2"></div>
+      </div>
+      <div class="container final-cta-inner" data-animate="fade-up">
+        <h2 class="final-cta-title">HP Kamu Bermasalah?</h2>
+        <p class="final-cta-sub">Jangan tunggu sampai kerusakannya semakin parah.<br />Konsultasikan sekarang dengan Mitracare Solution.</p>
+        <div class="final-cta-buttons">
+          <button class="btn btn-wa btn-xl" id="finalWaBtn" type="button">💬 CHAT WHATSAPP</button>
+          <a href="#booking" class="btn btn-outline-light btn-xl">🔧 SERVIS SEKARANG</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== KONTAK ===== -->
+    <section class="section contact-section" id="kontak">
+      <div class="container">
+        <div class="section-header" data-animate="fade-up">
+          <div class="section-badge">Kontak</div>
+          <h2 class="section-title">Hubungi Kami</h2>
+        </div>
+        <div class="contact-card" data-animate="fade-up" data-delay="100">
+          <div class="contact-brand">
+            <span class="contact-logo-icon">🔧</span>
+            <span class="contact-brand-name">Mitracare Solution</span>
+          </div>
+          <div class="contact-items">
+            <div class="contact-item">
+              <span class="contact-icon">📍</span>
+              <div class="contact-detail">
+                <div class="contact-label">Alamat</div>
+                <div class="contact-value">[ALAMAT TOKO]</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">📱</span>
+              <div class="contact-detail">
+                <div class="contact-label">WhatsApp</div>
+                <div class="contact-value" id="contactWaNumber">[NOMOR WHATSAPP]</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">�</span>
+              <div class="contact-detail">
+                <div class="contact-label">Media Sosial</div>
+                <!-- Social links injected by JS -->
+                <div class="contact-social-links" id="contactSocialLinks"></div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">🕐</span>
+              <div class="contact-detail">
+                <div class="contact-label">Jam Operasional</div>
+                <div class="contact-value">[JAM OPERASIONAL]</div>
+              </div>
+            </div>
+          </div>
+          <a href="#" class="btn btn-primary btn-location" id="locationBtn">
+            📍 LIHAT LOKASI
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span>🔧</span>
+          <span class="footer-logo-text">Mitracare<span class="logo-accent">Solution</span></span>
+        </div>
+        <p class="footer-tagline">Solusi Cepat Untuk Semua Masalah HP</p>
+        <div class="footer-socials" id="footerSocials">
+          <!-- Injected by JS with real SVG icons -->
+        </div>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <div class="footer-nav-title">Navigasi</div>
+        <a href="#home"    class="footer-nav-link">Home</a>
+        <a href="#layanan" class="footer-nav-link">Layanan</a>
+        <a href="#tentang" class="footer-nav-link">Tentang</a>
+        <a href="#kontak"  class="footer-nav-link">Kontak</a>
+        <a href="#booking" class="footer-nav-link">Booking Servis</a>
+      </nav>
+
+      <div class="footer-cta-col">
+        <div class="footer-nav-title">Kontak Cepat</div>
+        <p class="footer-cta-text">HP bermasalah? Langsung chat dengan kami.</p>
+        <button class="btn btn-wa footer-wa-btn" id="footerWaCta" type="button">
+          💬 Chat WhatsApp
+        </button>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="footer-copy">© 2026 Mitracare Solution. All Rights Reserved.</p>
+        <p class="footer-sub">Solusi Cepat Untuk Semua Masalah HP</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WA FAB -->
+  <a href="#" class="fab-wa" id="fabWa" aria-label="Chat WhatsApp" title="Chat WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span class="fab-label">WhatsApp</span>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>
