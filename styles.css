@@ -2745,3 +2745,142 @@ input::placeholder, textarea::placeholder { color: #5c6bc0 !important; opacity: 
 [data-animate] { color: inherit; }
 
 /* --- Cursor glow update ke warna terang --- */
+
+/* =====================================================
+   LOGO IMAGE — semua instance pakai gambar
+   ===================================================== */
+.logo-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.splash-logo-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+
+.contact-logo-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.footer-logo-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* =====================================================
+   NAVBAR CLOCK — jam realtime
+   ===================================================== */
+.navbar-clock {
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+  margin-left: 12px;
+  background: rgba(255,255,255,0.30);
+  border: 1px solid rgba(255,255,255,0.55);
+  border-radius: 10px;
+  padding: 5px 12px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@media (min-width: 768px) {
+  .navbar-clock { display: flex; }
+}
+
+.clock-time {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #1a1a2e;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.clock-date {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: #5c6bc0;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+/* =====================================================
+   LOGO CUBE 3D — animasi kubus berputar di hero
+   ===================================================== */
+.logo-cube-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+  perspective: 600px;
+}
+
+.logo-cube {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: cubeRotate 8s linear infinite;
+  filter: drop-shadow(0 12px 32px rgba(245,158,11,0.35));
+}
+
+@keyframes cubeRotate {
+  0%   { transform: rotateX(0deg)   rotateY(0deg); }
+  25%  { transform: rotateX(15deg)  rotateY(90deg); }
+  50%  { transform: rotateX(0deg)   rotateY(180deg); }
+  75%  { transform: rotateX(-15deg) rotateY(270deg); }
+  100% { transform: rotateX(0deg)   rotateY(360deg); }
+}
+
+.cube-face {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border: 2px solid rgba(255,255,255,0.55);
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.cube-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cube-front  { transform: translateZ(40px); }
+.cube-back   { transform: rotateY(180deg) translateZ(40px); }
+.cube-left   { transform: rotateY(-90deg) translateZ(40px); }
+.cube-right  { transform: rotateY(90deg)  translateZ(40px); }
+.cube-top    { transform: rotateX(90deg)  translateZ(40px); }
+.cube-bottom { transform: rotateX(-90deg) translateZ(40px); }
+
+/* Responsive — sembunyikan kubus di mobile kecil */
+@media (max-width: 480px) {
+  .logo-cube { width: 60px; height: 60px; }
+  .cube-face { width: 60px; height: 60px; border-radius: 10px; }
+  .cube-front  { transform: translateZ(30px); }
+  .cube-back   { transform: rotateY(180deg) translateZ(30px); }
+  .cube-left   { transform: rotateY(-90deg) translateZ(30px); }
+  .cube-right  { transform: rotateY(90deg)  translateZ(30px); }
+  .cube-top    { transform: rotateX(90deg)  translateZ(30px); }
+  .cube-bottom { transform: rotateX(-90deg) translateZ(30px); }
+}

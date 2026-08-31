@@ -1153,3 +1153,27 @@ function shakeEl(el) {
     }
   }, 1000);
 })();
+
+/* =====================================================
+   19. NAVBAR CLOCK — jam & tanggal realtime
+   ===================================================== */
+(function initNavbarClock() {
+  const timeEl = document.getElementById('clockTime');
+  const dateEl = document.getElementById('clockDate');
+  if (!timeEl || !dateEl) return;
+
+  const DAYS  = ['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
+  const MONTHS = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+
+  function tick() {
+    const now = new Date();
+    const h   = now.getHours().toString().padStart(2, '0');
+    const m   = now.getMinutes().toString().padStart(2, '0');
+    const s   = now.getSeconds().toString().padStart(2, '0');
+    timeEl.textContent = `${h}:${m}:${s}`;
+    dateEl.textContent = `${DAYS[now.getDay()]}, ${now.getDate()} ${MONTHS[now.getMonth()]}`;
+  }
+
+  tick();
+  setInterval(tick, 1000);
+})();
