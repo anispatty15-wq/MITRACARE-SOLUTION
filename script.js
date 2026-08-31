@@ -184,8 +184,8 @@ const VIDEO_LIST = [
 // ✏️  VIDEO LAPTOP (landscape) — untuk layar laptop di section Tentang
 // Upload video landscape lalu tempel link-nya di sini
 const VIDEO_LIST_LAPTOP = [
-   { url: 'https://files.catbox.moe/azkkds.mp4', title: 'Servis Profesional' },
-   { url: 'https://files.catbox.moe/kc98jr.mp4', title: 'Proses Perbaikan' },
+   { url: 'https://files.catbox.moe/azkkds.mp4', title: 'MITRACARE SOLUTION' },
+   { url: 'https://files.catbox.moe/kc98jr.mp4', title: 'MITRACARE SOLUTION' },
 ];
 
 
@@ -1176,4 +1176,184 @@ function shakeEl(el) {
 
   tick();
   setInterval(tick, 1000);
+})();
+
+/* =====================================================
+   20. CUBE DRAG — putar kubus dengan mouse/touch
+   ===================================================== */
+(function initCubeDrag() {
+  const wrap = document.querySelector('.logo-cube-wrap');
+  const cube = document.querySelector('.logo-cube');
+  if (!wrap || !cube) return;
+
+  let isDragging = false;
+  let startX = 0, startY = 0;
+  let rotX = 12, rotY = 0;   // sudut awal sesuai animasi CSS
+  let velX = 0, velY = 0.6;  // kecepatan inersia
+  let lastX = 0, lastY = 0;
+  let rafId = null;
+
+  // Baca sudut terakhir dari animasi sebelum drag
+  function getComputedRotation() {
+    // Pakai nilai rotX/rotY terakhir kita sendiri
+    return { x: rotX, y: rotY };
+  }
+
+  function applyRotation() {
+    cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+  }
+
+  function startDrag(e) {
+    isDragging = true;
+    cube.classList.add('dragging');
+    cube.style.animation = 'none'; // pause CSS animation
+
+    const pt = e.touches ? e.touches[0] : e;
+    startX = lastX = pt.clientX;
+    startY = lastY = pt.clientY;
+    velX = 0; velY = 0;
+
+    cancelAnimationFrame(rafId);
+    e.preventDefault();
+  }
+
+  function onDrag(e) {
+    if (!isDragging) return;
+    const pt = e.touches ? e.touches[0] : e;
+
+    const dx = pt.clientX - lastX;
+    const dy = pt.clientY - lastY;
+
+    velX = dy * 0.4;  // drag vertikal → rotasi X
+    velY = dx * 0.4;  // drag horizontal → rotasi Y
+
+    rotX += velX;
+    rotY += velY;
+
+    // Batasi rotX agar tidak terbalik
+    rotX = Math.max(-60, Math.min(60, rotX));
+
+    lastX = pt.clientX;
+    lastY = pt.clientY;
+
+    applyRotation();
+    e.preventDefault();
+  }
+
+  function endDrag() {
+    if (!isDragging) return;
+    isDragging = false;
+    cube.classList.remove('dragging');
+
+    // Inersia — lanjut putar setelah lepas
+    function inertia() {
+      velX *= 0.92;
+      velY *= 0.96;
+
+      rotX += velX;
+      rotY += velY;
+      rotX = Math.max(-60, Math.min(60, rotX));
+
+      // Kalau kecepatan sudah sangat kecil, resume auto rotate
+      if (Math.abs(velX) < 0.05 && Math.abs(velY) < 0.05) {
+        // Resume animasi CSS dari posisi saat ini
+        cube.style.animation = '';
+        cube.style.transform = '';
+        return;
+      }
+
+      applyRotation();
+      rafId = requestAnimationFrame(inertia);
+    }
+
+    rafId = requestAnimationFrame(inertia);
+  }
+
+  // Mouse events
+  wrap.addEventListener('mousedown',  startDrag, { passive: false });
+  window.addEventListener('mousemove', onDrag,   { passive: false });
+  window.addEventListener('mouseup',   endDrag);
+
+  // Touch events
+  wrap.addEventListener('touchstart', startDrag, { passive: false });
+  window.addEventListener('touchmove', onDrag,   { passive: false });
+  window.addEventListener('touchend',  endDrag);
+})();
+
+/* =====================================================
+   21. HERO PARALLAX — HP & kubus ikut gerak mouse
+   ===================================================== */
+(function initHeroParallax() {
+  const hero     = document.querySelector('.hero');
+  const phoneMockup = document.querySelector('.hero-visual .phone-mockup');
+  const cubeWrap = document.querySelector('.hero-cube-col');
+
+  if (!hero || (!phoneMockup && !cubeWrap)) return;
+
+  // Hanya aktif di desktop (hover capable)
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  let targetPhoneX = 0, targetPhoneY = 0;
+  let targetCubeX  = 0, targetCubeY  = 0;
+  let currentPhoneX = 0, currentPhoneY = 0;
+  let currentCubeX  = 0, currentCubeY  = 0;
+  let rafId = null;
+  let isInHero = false;
+
+  // Simpan transform awal supaya tidak konflik dengan animasi lain
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function onMouseMove(e) {
+    const rect = hero.getBoundingClientRect();
+    // Posisi relatif terhadap tengah hero (-1 s/d 1)
+    const nx = ((e.clientX - rect.left) / rect.width  - 0.5) * 2;
+    const ny = ((e.clientY - rect.top)  / rect.height - 0.5) * 2;
+
+    // HP bergerak sedikit berlawanan (parallax natural)
+    targetPhoneX = nx * -18;   // max ±18px horizontal
+    targetPhoneY = ny * -12;   // max ±12px vertikal
+
+    // Kubus bergerak lebih besar & sedikit berbeda arah
+    targetCubeX  = nx * 22;
+    targetCubeY  = ny * 16;
+  }
+
+  function animate() {
+    // Smooth lerp — easing 8%
+    currentPhoneX = lerp(currentPhoneX, targetPhoneX, 0.08);
+    currentPhoneY = lerp(currentPhoneY, targetPhoneY, 0.08);
+    currentCubeX  = lerp(currentCubeX,  targetCubeX,  0.06);
+    currentCubeY  = lerp(currentCubeY,  targetCubeY,  0.06);
+
+    if (phoneMockup) {
+      phoneMockup.style.transform =
+        `translate(${currentPhoneX}px, ${currentPhoneY}px) ` +
+        `rotateY(${currentPhoneX * 0.12}deg) rotateX(${-currentPhoneY * 0.08}deg)`;
+    }
+
+    if (cubeWrap) {
+      cubeWrap.style.transform =
+        `translate(${currentCubeX}px, ${currentCubeY}px)`;
+    }
+
+    rafId = requestAnimationFrame(animate);
+  }
+
+  function onMouseLeave() {
+    // Kembalikan ke posisi awal saat cursor keluar hero
+    isInHero = false;
+    targetPhoneX = 0; targetPhoneY = 0;
+    targetCubeX  = 0; targetCubeY  = 0;
+  }
+
+  function onMouseEnter() {
+    isInHero = true;
+  }
+
+  hero.addEventListener('mousemove',  onMouseMove,  { passive: true });
+  hero.addEventListener('mouseleave', onMouseLeave, { passive: true });
+  hero.addEventListener('mouseenter', onMouseEnter, { passive: true });
+
+  // Jalankan loop animasi terus-menerus
+  animate();
 })();

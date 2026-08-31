@@ -434,7 +434,7 @@ ul, ol { list-style: none; }
   display: flex;
   align-items: center;
   position: relative;
-  overflow: hidden;
+  overflow: clip; /* clip tidak merusak transform-style: preserve-3d, berbeda dengan hidden */
   background: transparent;
 }
 
@@ -498,7 +498,7 @@ ul, ol { list-style: none; }
 }
 
 @media (min-width: 900px) {
-  .hero-container { grid-template-columns: 1fr 1fr; gap: 64px; }
+  .hero-container { grid-template-columns: 1.2fr 1fr 220px; gap: 48px; }
 }
 
 .hero-content { display: flex; flex-direction: column; gap: 20px; max-width: 580px; }
@@ -2343,21 +2343,23 @@ ul, ol { list-style: none; }
   color: #fff;
 }
 
-.footer-logo-text { color: #fff; }
-.footer-tagline { font-size: 0.875rem; color: rgba(255,255,255,0.4); margin-bottom: 20px; line-height: 1.5; }
+.footer-logo-text { color: #1a1a2e; }
+.footer-tagline { font-size: 0.875rem; color: #2d3561; margin-bottom: 20px; line-height: 1.5; }
 
 .footer-socials { display: flex; gap: 10px; }
 
 .social-link {
   width: 38px; height: 38px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.35);
+  border: 1px solid rgba(255,255,255,0.6);
   border-radius: 9px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255,255,255,0.5);
+  color: #2d3561;
   transition: var(--transition);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .social-link svg { width: 18px; height: 18px; }
@@ -2372,7 +2374,7 @@ ul, ol { list-style: none; }
 .footer-nav-title {
   font-size: 0.8125rem;
   font-weight: 700;
-  color: rgba(255,255,255,0.35);
+  color: #1a1a2e;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: 16px;
@@ -2381,18 +2383,19 @@ ul, ol { list-style: none; }
 .footer-nav-link {
   display: block;
   font-size: 0.9rem;
-  color: rgba(255,255,255,0.5);
+  color: #2d3561;
   padding: 5px 0;
   transition: color var(--transition);
+  font-weight: 500;
 }
 
-.footer-nav-link:hover { color: var(--primary-light); }
+.footer-nav-link:hover { color: var(--primary-dark); }
 
-.footer-cta-text { font-size: 0.875rem; color: rgba(255,255,255,0.45); margin-bottom: 14px; line-height: 1.6; }
+.footer-cta-text { font-size: 0.875rem; color: #2d3561; margin-bottom: 14px; line-height: 1.6; }
 .footer-wa-btn { font-size: 0.875rem; padding: 11px 20px; }
 
 .footer-bottom {
-  border-top: 1px solid rgba(255,255,255,0.06);
+  border-top: 1px solid rgba(0,0,0,0.08);
   padding: 20px;
 }
 
@@ -2404,8 +2407,8 @@ ul, ol { list-style: none; }
   text-align: center;
 }
 
-.footer-copy { font-size: 0.8125rem; color: rgba(255,255,255,0.3); }
-.footer-sub { font-size: 0.75rem; color: rgba(255,255,255,0.2); }
+.footer-copy { font-size: 0.8125rem; color: #2d3561; font-weight: 500; }
+.footer-sub { font-size: 0.75rem; color: #5c6bc0; }
 
 /* =====================================================
    FLOATING WA FAB
@@ -2822,41 +2825,84 @@ input::placeholder, textarea::placeholder { color: #5c6bc0 !important; opacity: 
 /* =====================================================
    LOGO CUBE 3D — animasi kubus berputar di hero
    ===================================================== */
+
+/* Kolom kubus di hero */
+.hero-cube-col {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding-left: 24px;
+  /* Penting: jangan overflow hidden, jangan filter — akan break 3D */
+  overflow: visible;
+}
+
+@media (min-width: 900px) {
+  .hero-cube-col { display: flex; }
+}
+
+.cube-label {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #1a1a2e;
+  text-align: center;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+.cube-label span { color: var(--primary-dark); }
+
+/* Wrap perspektif */
 .logo-cube-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 24px;
-  perspective: 600px;
+  perspective: 900px;
+  perspective-origin: 50% 45%;
+  padding: 40px;
+  cursor: grab;
 }
+.logo-cube-wrap:active { cursor: grabbing; }
 
+/* Kubus ukuran 160px — translateZ = 80px (setengah) agar sisi rapat */
 .logo-cube {
-  width: 80px;
-  height: 80px;
+  width: 160px;
+  height: 160px;
   position: relative;
   transform-style: preserve-3d;
-  animation: cubeRotate 8s linear infinite;
-  filter: drop-shadow(0 12px 32px rgba(245,158,11,0.35));
+  /* animasi auto, bisa di-override JS saat drag */
+  animation: cubeAutoRotate 12s linear infinite;
 }
 
-@keyframes cubeRotate {
-  0%   { transform: rotateX(0deg)   rotateY(0deg); }
-  25%  { transform: rotateX(15deg)  rotateY(90deg); }
-  50%  { transform: rotateX(0deg)   rotateY(180deg); }
-  75%  { transform: rotateX(-15deg) rotateY(270deg); }
-  100% { transform: rotateX(0deg)   rotateY(360deg); }
+/* Saat user drag — pause animasi */
+.logo-cube.dragging {
+  animation-play-state: paused;
 }
 
+@keyframes cubeAutoRotate {
+  from { transform: rotateX(12deg) rotateY(0deg); }
+  to   { transform: rotateX(12deg) rotateY(360deg); }
+}
+
+/* Sisi-sisi kubus — tanpa border-radius agar rapat */
 .cube-face {
   position: absolute;
-  width: 80px;
-  height: 80px;
-  border: 2px solid rgba(255,255,255,0.55);
-  border-radius: 14px;
+  width: 160px;
+  height: 160px;
   overflow: hidden;
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* outline tipis sebagai border agar tidak ada celah */
+  outline: 1px solid rgba(255,255,255,0.4);
+}
+
+/* Overlay glass tipis di atas foto setiap sisi */
+.cube-face::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+  pointer-events: none;
 }
 
 .cube-face img {
@@ -2864,23 +2910,48 @@ input::placeholder, textarea::placeholder { color: #5c6bc0 !important; opacity: 
   height: 100%;
   object-fit: cover;
   display: block;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
-.cube-front  { transform: translateZ(40px); }
-.cube-back   { transform: rotateY(180deg) translateZ(40px); }
-.cube-left   { transform: rotateY(-90deg) translateZ(40px); }
-.cube-right  { transform: rotateY(90deg)  translateZ(40px); }
-.cube-top    { transform: rotateX(90deg)  translateZ(40px); }
-.cube-bottom { transform: rotateX(-90deg) translateZ(40px); }
+/* translateZ = 80px (setengah dari 160px) — ini yang tutup celah */
+.cube-front  { transform: translateZ(80px); }
+.cube-back   { transform: rotateY(180deg) translateZ(80px); }
+.cube-left   { transform: rotateY(-90deg) translateZ(80px); }
+.cube-right  { transform: rotateY(90deg)  translateZ(80px); }
+.cube-top    { transform: rotateX(90deg)  translateZ(80px); }
+.cube-bottom { transform: rotateX(-90deg) translateZ(80px); }
 
-/* Responsive — sembunyikan kubus di mobile kecil */
-@media (max-width: 480px) {
-  .logo-cube { width: 60px; height: 60px; }
-  .cube-face { width: 60px; height: 60px; border-radius: 10px; }
-  .cube-front  { transform: translateZ(30px); }
-  .cube-back   { transform: rotateY(180deg) translateZ(30px); }
-  .cube-left   { transform: rotateY(-90deg) translateZ(30px); }
-  .cube-right  { transform: rotateY(90deg)  translateZ(30px); }
-  .cube-top    { transform: rotateX(90deg)  translateZ(30px); }
-  .cube-bottom { transform: rotateX(-90deg) translateZ(30px); }
+/* Shadow di wrapper */
+.logo-cube-wrap {
+  filter: drop-shadow(0 20px 40px rgba(245,158,11,0.40))
+          drop-shadow(0 4px 12px rgba(0,0,0,0.18));
+}
+
+/* Mobile: kubus lebih kecil */
+@media (max-width: 899px) {
+  .hero-cube-col { display: none; }
+}
+
+/* =====================================================
+   HERO PARALLAX — smooth motion untuk HP & kubus
+   ===================================================== */
+.hero-visual .phone-mockup {
+  will-change: transform;
+  transform-style: preserve-3d;
+  transition: transform 0.05s linear; /* fallback — JS override dengan RAF */
+}
+
+.hero-cube-col {
+  will-change: transform;
+}
+
+/* Kurangi motion untuk yang prefer-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-visual .phone-mockup,
+  .hero-cube-col {
+    transform: none !important;
+    transition: none !important;
+  }
 }
